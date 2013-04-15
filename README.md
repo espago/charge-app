@@ -1,6 +1,6 @@
 This tutorial will get you up and running with Espago’s Charge and Rails in no time at all.
 
-The first step is adding the Stripe gem to you Rails application’s **Gemfile**:
+The first step is adding the Espago gem to you Rails application’s **Gemfile**:
 
     gem 'espago', :git => 'https://github.com/espago/espago' 
 
@@ -46,7 +46,7 @@ We’re pulling these keys out of environmental variables so as not to hardcode 
 
 ##Views
 
-Let’s create new.html.erb under app/views/charges, which is going to be our checkout page. It's also going to handle form display
+Let’s create **new.html.erb** under **app/views/charges**, which is going to be our checkout page. It's also going to handle form display
 
     <%= form_tag charges_path do %>
       <div>
