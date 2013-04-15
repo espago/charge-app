@@ -1,0 +1,35 @@
+<%= form_tag charges_path do %>
+  <div>
+    <%= label_tag :clients_email %>
+    <%= text_field_tag "client[email]" %>
+  </div>
+    <%= label_tag :clients_description %>
+    <%= text_field_tag "client[description]" %>
+  <div>
+    <%= label_tag :clients_card_first_name %>
+    <%= text_field_tag "client[card][first_name]" %>
+  </div>
+  <div>
+    <%= label_tag :clients_card_last_name %>
+    <%= text_field_tag "client[card][last_name]" %>
+  </div>
+  <div>
+    <%= label_tag :clients_card_number %>
+    <%= text_field_tag "client[card][number]" %>
+  </div>
+  <div>
+    <%= label_tag :clients_card_month %>
+    <%= text_field_tag "client[card][month]" %>
+  </div>
+  <div>
+    <%= label_tag :clients_card_year %>
+    <%= text_field_tag "client[card][year]" %>
+  </div>
+  <div>
+    <%= label_tag :clients_card_verfication_value %>
+    <%= text_field_tag "client[card][verification_value]" %>
+  </div>
+  <div>
+    <%= submit_tag "ok" %>
+  </div>
+<% end %>

@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/espago/espago
+  revision: e594b04c579acac75c2f7be0539c7af8a62d54e1
+  specs:
+    espago (0.0.3)
+      facets
+      faraday
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -40,12 +48,9 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
-    haml (3.1.7)
-    haml-rails (0.3.5)
-      actionpack (>= 3.1, < 4.1)
-      activesupport (>= 3.1, < 4.1)
-      haml (~> 3.1)
-      railties (>= 3.1, < 4.1)
+    facets (2.9.3)
+    faraday (0.8.7)
+      multipart-post (~> 1.1)
     hike (1.2.2)
     i18n (0.6.1)
     journey (1.0.4)
@@ -59,6 +64,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.22)
     multi_json (1.7.2)
+    multipart-post (1.2.0)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -111,7 +117,7 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
-  haml-rails
+  espago!
   jquery-rails
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
