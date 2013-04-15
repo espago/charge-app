@@ -86,4 +86,6 @@ Let’s create **new.html.erb** under **app/views/charges**, which is going to b
 
 Finally let’s make a **create.html.erb** view under **app/views/charges** that shows users a success message.
 
+    <h2>Thanks, you paid <strong><%= @amount%></strong>!</h2>
+
 And that’s a wrap, Espago and Rails integration in a matter of minutes.
