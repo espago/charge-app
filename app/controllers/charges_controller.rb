@@ -15,9 +15,11 @@ class ChargesController < ApplicationController
       :currency    => 'pln',
     }
 
-    charge[:trasnfer] = params[:transfer] if params[:trasnfer]
+    charge[:transfer] = params[:transfer] if params[:transfer]
     charge[:cc] = params[:cc] if params[:cc]
 
     @charge = Espago.charges(:post, charge)
+    
+    redirect_to @charge["redirect_url"] if @charge["redirect_url"]
   end
 end
