@@ -1,3 +1,650 @@
 // Place all the styles related to the charges controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+// Place all the styles related to the transfers controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "compass";
+
+//Colors:
+
+$espago-blue: #0F70B7;
+$green: #009985;
+$grey: #464646;
+$lightgrey: #ccc;
+$skyblue: rgba(202, 230, 252, 1);
+$transparent-grey: rgba(210,210,210,0.5);
+$white: #f5f5f5;
+
+// Box-model properties:
+
+$container-padding: 12px;
+
+#espago-container {
+  @include border-radius(4px);
+  background: $white;
+  padding: $container-padding;
+  hr {
+    background: #ddd;
+    border: none;
+    clear: both;
+    height: 1px;
+    margin: $container-padding 0;
+  }
+
+  form {
+    padding: 0 12px; 
+    
+    label, input {
+      display: block;
+      width: 450px;
+      &[type=submit] {
+        width: auto;
+      }
+    }
+
+    .first_name, .last_name {
+      display: inline-block;
+      width: 225px;
+      input { width: 200px; }
+    }
+    .last_name input {
+      width: 220px;
+    }
+    .month, .year, .cvv {
+      display: inline-block;
+      width: 150px;
+      input { width: 130px; }
+    }
+    .cvv input { width: 142px; }
+  }
+
+  .hidden { display: none; }
+
+  .button {
+    @include background-image(linear-gradient(270deg, $lightgrey, darken($lightgrey, 15%)));
+    @include border-radius(4px);
+    @include box-shadow(0 3px 0 0 darken($lightgrey, 20%));
+    @include box-sizing(border-box);
+    @include filter-gradient($lightgrey, darken($lightgrey, 15%), vertical);
+    @include transition(background-image, 0.5s, ease, 0);
+    border:1px solid darken($lightgrey, 20%);
+    color: #000;
+    display: inline-block;
+    font-family: 'Arial Narrow';
+    font-size: 15px;
+    height: 34px;
+    margin-bottom: 2px;
+    opacity: 0.5;
+    outline: 0;
+    padding:7px;
+    position: relative;
+    text-decoration: none;
+    width: 190px;
+    
+    &.enabled {
+      @include background-image(linear-gradient(270deg, $skyblue, darken($skyblue, 10%)));
+      @include box-shadow(0 3px 0 0 darken($skyblue, 20%));
+      @include filter-gradient($skyblue, darken($skyblue, 15%), vertical);
+      border:1px solid darken($skyblue, 20%);
+      color: $espago-blue;
+      cursor: pointer;
+      opacity: 1;
+
+      &:hover, &:focus {
+        @include filter-gradient($skyblue, darken($skyblue, 5%), vertical);
+        @include background-image(linear-gradient(270deg, $skyblue, darken($skyblue, 5%)));
+      }
+
+      &:active {
+        @include box-shadow(0 2px 0 0 darken($skyblue, 20%));
+        top: 1px;
+      }
+    }
+  }
+
+  footer {
+    text-align: center;
+  }
+
+  #logo, #transaction-id {
+    height: 34px;
+    margin-bottom: $container-padding - 2;
+    width: 160px;
+  }
+
+  #transaction-id {
+    @include border-radius(2px);
+    @include box-sizing(border-box);
+    background: $transparent-grey;
+    float: right;
+    overflow: hidden;
+    padding: 2px 0;
+    width: 210px;
+
+    label, .id {
+      @include box-sizing(border-box);
+      display: inline-block;
+      height: 30px;
+      padding:7px 4px;
+    }
+    
+    label {
+      background: #FCFAFA;
+    }
+
+    .id {
+      background: #fff;
+      font-weight: bold;
+      margin-left: -4px;
+      text-align: center;
+      width: 120px;
+    }
+  }
+
+  #logo {
+    background: url('espago.png') no-repeat;
+    float: left;
+  }
+
+  .content {
+    margin-top: $container-padding;
+    position: relative;
+    
+    & > div, & > ul {
+      margin-bottom: $container-padding;
+    }
+
+    .clearfix {
+      clear: both;
+      margin: 0;
+    }
+  }
+
+  .top {
+    @include box-sizing(border-box);
+    @include border-radius(2px);
+    background: $skyblue;
+    border: 1px solid darken($skyblue, 15%);
+    color: $espago-blue;
+    display: block;
+    float: left;
+    font-size: 14px;
+    height: 30px;
+    padding: 4px;
+
+    &.full {
+      float: none;
+    }
+
+    &.back {
+      background: $espago-blue;
+      border: 1px solid darken($espago-blue, 5%);
+      margin-right: 0.5%;
+      width:4%;
+      
+      &:hover {
+        background: lighten($espago-blue, 5%);
+      }
+      
+      & + div {
+        width:95.5%;
+      }
+    }
+
+    i {
+      font-size: 22px;
+      vertical-align: -5px;
+    }
+  }
+
+  i.icon-back {
+    color: $white;
+    cursor: pointer;
+    float: left;
+    font-size: 20px;
+    left: 4px;
+    pointer-events: none;
+    position: absolute;
+    top: 7px;
+  }
+
+  .bank-select, .card-select, .actions {
+    @include border-radius(2px);
+    background: #fff;
+    border: 1px solid $lightgrey;
+
+    h2 {
+      background: $transparent-grey;
+      font-weight: normal;
+      margin: 0;
+      padding: 2px 6px;
+      width: 33%;
+    }
+  }
+
+  .bank-select, .card-select {
+    margin: 0;
+    padding: 0;
+
+    &:after {
+      clear: both;
+      content: '';
+      display: block;
+    }
+
+    li {
+      display: inline-block;
+      float: left;
+      list-style-type: none;
+    }
+
+    a {
+      float: left;
+      opacity: 0.8;
+      padding: 10px 8px;
+      text-align: center;
+      text-decoration: none;
+
+      &:hover {
+        opacity: 1;
+      }
+
+      &.selected {
+        opacity: 1;
+        & > div {
+          @include box-shadow(inset 0 0 2px 1px lighten($espago-blue, 10%));  
+          border: 1px solid $espago-blue;
+          
+          &:hover {
+            @include box-shadow(inset 0 0 2px 1px lighten($espago-blue, 10%));
+          }
+        }
+        
+        span {
+          color: $espago-blue;
+          font-weight: bold;
+        }
+      }
+
+      div {
+        @include border-radius;
+        @include box-shadow(inset 0 0 6px 1px $lightgrey);
+        border: 1px solid $lightgrey;
+        color: darken($lightgrey, 15%);
+        height: 40px;
+        text-align: center;
+
+        &:hover {
+          @include box-shadow(inset 0 0 6px 2px darken($skyblue, 10%));
+          color: darken($skyblue, 20%);
+          font-weight: bold;
+        }
+
+        span {
+          bottom: -42px;
+          font-weight: bold;
+          position: relative;
+        }
+      }
+    }
+  }
+
+  .bank-select {
+    padding-bottom: 12px;
+    div {
+      background: #fff url('banki-loga.png') no-repeat;
+      width: 140px;
+
+      &.inteligo {background-position: 0px 0px;}
+      &.bz-wbk {background-position: -140px 0px;}
+      &.bnp-paribas {background-position: -280px 0px;}
+      &.getin {background-position: 0px -39px;}
+      &.mbank {background-position: -140px -39px;}
+      &.multibank {background-position: -280px -39px;}
+      &.ipko {background-position: 0px -78px;}
+    }
+  }
+
+
+  .card-select {
+    padding-bottom: 12px;    
+    div {
+      background: #fff url('karty-loga.png') no-repeat;
+      width: 70px;
+    
+      &.visa {background-position: 5px 5px;}
+      &.mastercard {background-position: -56px 3px;}
+      &.american-express {background-position: -116px 3px;}
+    }
+  }
+
+  .transfer-data {
+    & + .actions:not(.wide) {
+      margin-top:-12px;
+    }
+
+    table {
+      @include border-radius(2px);
+      background: #DFDADA;
+      border:1px solid $lightgrey;
+      border-spacing: 1px;
+      width: 100%;
+
+      tr {
+        height: 40px;
+        font-size: 14px;
+        
+        td {
+          padding:8px;
+          
+          &:first-child {
+            background: #f7f7f7;
+            width: 25%;
+          }
+          
+          &:last-child {
+            background: #fff;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+
+  .extension-installer {
+    @include border-radius(2px);
+    @include box-sizing(border-box);
+    @include transition(all 0.5s ease 0s);
+    background: $green;
+    border: 1px solid darken($green, 5%);
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    height: 38px;
+    margin-bottom: $container-padding;
+    padding: 8px;
+    width: 100%;
+    
+    &:hover, &:focus {
+      background: lighten($green, 5%);
+      
+      #help {
+        color: lighten($lightgrey, 8%);
+      }
+    }
+
+    &.flash {
+      background: lighten($green, 10%);
+      border: 1px solid lighten($green, 5%);
+      opacity: 0.75;
+    }
+
+    i:first-child {
+      font-size: 24px;
+    }
+    
+    #help {
+      @include transition(color 0.25s ease-in 0s);
+      border:1px solid transparent;
+      color: $lightgrey;
+      cursor: pointer;
+      float: right;
+      font-size: 22px;
+      height: 24px;
+      text-align: center;
+      width: 26px;
+      
+      &:hover {
+        color: $white;
+      }
+      
+      &.open {
+        @include border-radius(2px);
+        @include box-shadow(1px -1px 0px $espago-blue);
+        background: #fff;
+        border-bottom: none;
+        border-color: $lightgrey;
+        color: $espago-blue;
+        height: 32px;
+        margin-top: -4px;
+        padding-top: 4px;
+      }
+    }
+    
+    .tooltip {
+      @include transition(opacity 1s ease 0s);
+      cursor: pointer;  
+      height: 0;
+      overflow: hidden;
+      opacity: 0;
+      z-index: 10;
+      
+      &.open {
+        @include box-shadow(1px 1px 1px $espago-blue);
+        @include box-sizing(border-box);
+        background: #fff;
+        border: 1px solid $lightgrey;
+        border-top: none;
+        color: #000;
+        height: 160px;
+        opacity: 1;
+        padding:6px 4px;
+        position: absolute;
+        right: 9px;
+        width: 260px;
+      }
+    }
+
+    h4 {
+      @include border-radius(2px);
+      background: $lightgrey;
+      font-size:17px;
+      margin:0 0 4px 0;
+      padding:6px;
+    }
+
+    b, span {
+      padding-left: 4px;
+      vertical-align: 7px;
+    }
+
+    span {
+      padding-left: 0;
+    }
+
+    .browser-icon {
+      height: 80px;
+      position: absolute;
+      width: 80px;
+    }
+
+    #install-button {  
+      &.chrome > .browser-icon {
+        background: url('chrome.png') transparent no-repeat;
+      }
+
+      &.firefox > .browser-icon {
+        background: url('firefox.png') transparent no-repeat;
+      }
+    }
+  }
+
+
+  .actions {
+    overflow: hidden;
+    padding:4px 0;
+    text-align: center;
+
+    .button, .terms {
+      margin: 12px;
+    }
+    
+    .button {
+      float: right;
+    }
+    
+    .terms {
+      float: left;
+      height:20px;
+      padding:8px 0;
+      
+      input[type=checkbox] {
+        // @include transform(scale(1.5));
+        vertical-align: middle;
+        &:checked + label {
+          font-weight: bold;
+        }
+      }
+
+      label {
+        @include transition(all 0.5s ease);
+        cursor: pointer;
+        font-size: 14px;
+        vertical-align: middle;
+      }
+
+      &.error label{
+        color: #F00;
+      }
+    }    
+    
+    &.narrow {
+      background: rgba(255,255,255,0.5);
+      border-left: none;
+      border-right: none;
+      text-align: center;
+    }
+    
+    h3 {
+      margin: 0;
+    }
+    
+    .open-bank {
+      background: lighten($lightgrey, 15%);
+      height: 60px;
+
+      .button {
+        float: none;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+
+  #espago-card-form {
+    @include box-sizing(border-box);
+    @include border-radius(2px);
+    @include transition(opacity 0.5s ease-out 0);
+    opacity:0;
+    background: #fff;
+    border: 1px solid $lightgrey;
+    height: 404px;
+    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+
+    &.visible {
+      opacity:1;
+      z-index:10000;
+    }
+
+    hr {
+      margin:0;
+    }
+
+    .card-select {
+      padding: 0;
+      margin:0;
+      border: none;
+      float:left;
+      width:33%;
+      background:transparent;
+      div {
+        height:40px;
+        vertical-align: middle;
+        display:inline-block;
+      }
+      span {
+        font-weight: bold;
+        font-size:16px;
+        color: $green;
+      }
+    }
+
+    & > header {
+      height:12%;
+      padding: 1% 0 0 10px;
+      
+      .close {
+        @include border-radius(2px);
+        color: $grey;
+        cursor: pointer;
+        float: right;
+        font-size: 20px;
+        font-weight: bold;
+        margin: 6px;
+        padding: 2px;
+        text-align: center;
+        width: 24px;
+        &:hover, &:focus {
+          background: $espago-blue;
+          color: $white;
+        }
+      }
+    }
+
+    .column {
+      @include box-sizing(border-box);
+      width:50%;
+      float:left;
+      height:278px;
+      padding:0 8px;
+      & > header {
+        color: $espago-blue;
+        font-weight: bold;
+        padding:8px;
+        font-size: 18px;
+        border-bottom:1px solid $lightgrey;
+        background: #f7f7f7;
+        margin:0 -8px 16px -8px;
+        &.divider {
+          border-left:1px solid $lightgrey;
+        }
+      }
+      label {
+        display: block;
+        font-size:16px;
+        margin: 10px 0 2px 0;
+      }
+
+      input {
+        @include border-radius(2px);
+        border: 1px solid $lightgrey;
+        height:28px;
+        width:200px;
+        font-size: 15px;
+        padding:0 6px;
+        &:focus, &:active {
+          outline:1px solid $espago-blue;
+        }
+        &.digits {
+          width:60px;
+          display: inline-block;
+        }
+        &[type='submit'] {
+          margin-top: 10px;
+        }
+      }
+    }
+    
+    .actions {
+      background:#FCFAFA;
+      border:none;
+    }
+  }
+}
+
+

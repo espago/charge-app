@@ -1,0 +1,26 @@
+#espago-form
+  %h2 Espago
+  = form_tag charges_path do  
+    .email
+      = label_tag :email
+      = text_field_tag "client[email]"
+    .first_name
+      = label_tag :first_name
+      = text_field_tag "client[card][first_name]"
+    .last_name
+      = label_tag :last_name
+      = text_field_tag "client[card][last_name]"
+    .number
+      = label_tag :number
+      = text_field_tag "client[card][number]"
+    .month
+      = label_tag :month
+      = text_field_tag "client[card][month]"
+    .year
+      = label_tag :year
+      = text_field_tag "client[card][year]"
+    .cvv
+      = label_tag :verfication_value
+      = text_field_tag "client[card][verification_value]"
+    .hidden= text_field_tag "transfer", "espago"
+    .submit= submit_tag "ok"

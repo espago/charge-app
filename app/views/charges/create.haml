@@ -1,0 +1,15 @@
+.header-info
+  %div
+    %h3 Opis transkcji
+    = @charge["description"]
+  %div
+    %h3 Nazwa odbiorcy
+    = @charge["client"]["first_name"]
+    = @charge["client"]["last_name"]
+.header-info
+  %div
+    %h3 Kwota
+    = number_to_currency(@charge["amount"], locale: :pl)
+  %div
+    %h3 Tytuł przelewu
+    = @charge["id"]

@@ -8,11 +8,16 @@ class ChargesController < ApplicationController
 
     client = Espago.clients(:post, params[:client])
 
-    charge = Espago.charges(:post,
+    charge = {     
       :client      => client["id"],
       :amount      => @amount,
       :description => 'Rails Espago client',
-      :currency    => 'pln'
-    )
+      :currency    => 'pln',
+    }
+
+    charge[:trasnfer] = params[:transfer] if params[:trasnfer]
+    charge[:cc] = params[:cc] if params[:cc]
+
+    @charge = Espago.charges(:post, charge)
   end
 end
