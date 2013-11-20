@@ -4,8 +4,7 @@ class ChargesController < ApplicationController
 
   def create
     @amount = 100
-    # @product = Product.find(params[:product_id])
-
+    params[:client][:card] = params[:card_token]
     client = Espago.clients(:post, params[:client])
 
     charge = {     
@@ -15,11 +14,6 @@ class ChargesController < ApplicationController
       :currency    => 'pln',
     }
 
-    charge[:transfer] = params[:transfer] if params[:transfer]
-    charge[:cc] = params[:cc] if params[:cc]
-
     @charge = Espago.charges(:post, charge)
-    
-    redirect_to @charge["redirect_url"] if @charge["redirect_url"]
   end
 end

@@ -1,26 +1,36 @@
+%script{src: "https://js.espago.com/v1/", type: "text/javascript"}
+%script{type: "text/javascript"}
+  $(document).ready(function(){
+  $("#credit_card_form").submit(function(event){
+  var espago = new Espago({public_key: "#{escape_javascript Espago.public_key}:", live: false, form:  '#credit_card_form', card_number: '#client_card_number',
+  first_name: '#client_card_first_name', last_name: '#client_card_last_name', month: '#client_card_month',  year: '#client_card_year',
+  cvc: '#client_card_verification_value'});
+  event.preventDefault();
+  espago.create_token();
+  })
+  })
 #cc-form
   %h2 Credit Card
-  = form_tag charges_path do
+  = form_tag charges_path, {id: 'credit_card_form'} do
     .email
       = label_tag :email
       = text_field_tag "client[email]"
     .first_name
       = label_tag :first_name
-      = text_field_tag "client[card][first_name]"
+      = text_field_tag "client[card][first_name]", nil, name: nil
     .last_name
       = label_tag :last_name
-      = text_field_tag "client[card][last_name]"
+      = text_field_tag "client[card][last_name]", nil, name: nil
     .number
       = label_tag :number
-      = text_field_tag "client[card][number]"
+      = text_field_tag "client[card][number]", nil, name: nil
     .month
       = label_tag :month
-      = text_field_tag "client[card][month]"
+      = text_field_tag "client[card][month]", nil, name: nil
     .year
       = label_tag :year
-      = text_field_tag "client[card][year]"
+      = text_field_tag "client[card][year]", nil, name: nil
     .cvv
       = label_tag :verfication_value
-      = text_field_tag "client[card][verification_value]"
-    .hidden= text_field_tag "cc", "cc_123124135"
+      = text_field_tag "client[card][verification_value]", nil, name: nil
     .submit= submit_tag "ok"
