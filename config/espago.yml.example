@@ -1,0 +1,15 @@
+development:
+  app_id: 'a'
+  app_password: 'p'
+  public_key: 'pk'
+  production: false
+production:
+  app_id: 'a'
+  app_password: 'p'
+  public_key: 'pk'
+  production: true
+test:
+  app_id: 'a'
+  app_password: 'p'
+  public_key: 'pk'
+  production: false
